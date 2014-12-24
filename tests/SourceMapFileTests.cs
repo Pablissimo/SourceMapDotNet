@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using SourceMapDotNetTests.Properties;
+using SourceMapNet;
 using SourceMapNet.Model;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,11 @@ namespace SourceMapDotNetTests
         [Test]
         public void MappingGroups_Parses()
         {
-            var encoded = SourceMapFile.Parse(Resources.Library_js);
-            var mappingGroups = encoded.MappingGroups;
+            var consumer = new SourceMapConsumer(Resources.Library_js);
+            for (int i = 0; i < 10; i++)
+            {
+                var positions = consumer.OriginalPositionsFor(i + 1);
+            }
         }
     }
 }
