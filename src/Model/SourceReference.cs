@@ -10,7 +10,6 @@ namespace SourceMapNet.Model
     {
         public string File { get; set; }
         public int LineNumber { get; set; }
-        public int ColumnNumber { get; set; }
 
         public static SourceReference Empty
         {
@@ -19,7 +18,7 @@ namespace SourceMapNet.Model
 
         public override string ToString()
         {
-            return string.Format("{0}:{1}:{2}", this.File, this.LineNumber, this.ColumnNumber);
+            return string.Format("{0}:{1}", this.File, this.LineNumber);
         }
     }
 }
