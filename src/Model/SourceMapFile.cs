@@ -12,9 +12,9 @@ namespace SourceMapNet.Model
         public int Version { get; set; }
         public string File { get; set; }
         public string SourceRoot { get; set; }
-        public IEnumerable<string> Sources { get; set; }
-        public IEnumerable<string> SourcesContent { get; set; }
-        public IEnumerable<string> Names { get; set; }
+        public IList<string> Sources { get; set; }
+        public IList<string> SourcesContent { get; set; }
+        public IList<string> Names { get; set; }
         public string Mappings { get; set; }
     }
 }
