@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceMapDotNet", "SourceMapDotNet.csproj", "{DE144A45-D328-4996-BB6D-1F693FB15461}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceMapDotNetTests", "..\tests\SourceMapDotNetTests.csproj", "{135764BF-3F5A-4291-9CC4-9C271678B5DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EC45CD6D-AAAF-488E-8789-D89EE86108F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,15 @@ Global
 		{DE144A45-D328-4996-BB6D-1F693FB15461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE144A45-D328-4996-BB6D-1F693FB15461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE144A45-D328-4996-BB6D-1F693FB15461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{135764BF-3F5A-4291-9CC4-9C271678B5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{135764BF-3F5A-4291-9CC4-9C271678B5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{135764BF-3F5A-4291-9CC4-9C271678B5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{135764BF-3F5A-4291-9CC4-9C271678B5DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{135764BF-3F5A-4291-9CC4-9C271678B5DC} = {EC45CD6D-AAAF-488E-8789-D89EE86108F0}
 	EndGlobalSection
 EndGlobal
