@@ -65,6 +65,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SourceMapFileTests.cs" />
+    <Compile Include="Util\Base64Tests.cs" />
+    <Compile Include="Util\VlqDecoderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

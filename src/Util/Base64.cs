@@ -8,16 +8,16 @@ namespace SourceMapNet.Util
 {
     public static class Base64
     {
+        private const string BASE64_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         private static Dictionary<char, byte> _decodeTable = GetDecodeTable();
 
         private static Dictionary<char, byte> GetDecodeTable()
         {
             var table = new Dictionary<char, byte>();
 
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-            for (var idx = 0; idx < chars.Length; idx++)
+            for (var idx = 0; idx < BASE64_ALPHABET.Length; idx++)
             {
-                table[chars[idx]] = (byte)idx;
+                table[BASE64_ALPHABET[idx]] = (byte)idx;
             }
 
             return table;
@@ -26,6 +26,11 @@ namespace SourceMapNet.Util
         public static byte Decode(char base64char)
         {
             return _decodeTable[base64char];
+        }
+
+        public static char Encode(byte value)
+        {
+            return BASE64_ALPHABET[value];
         }
     }
 }
