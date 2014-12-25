@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace SourceMapDotNetTests
 {
     [TestFixture]
-    public class SourceMapFileTests
+    public class SourceMapConsumerTests
     {
         [Test]
         public void MappingGroups_Parses()
