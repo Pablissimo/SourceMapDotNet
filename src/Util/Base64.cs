@@ -23,13 +23,24 @@ namespace SourceMapNet.Util
             return table;
         }
 
-        public static byte Decode(char base64char)
+        public static byte Decode(char value)
         {
-            return _decodeTable[base64char];
+            byte toReturn;
+            if (!_decodeTable.TryGetValue(value, out toReturn))
+            {
+                throw new ArgumentOutOfRangeException("value");
+            }
+
+            return toReturn;
         }
 
         public static char Encode(byte value)
         {
+            if (value >= BASE64_ALPHABET.Length)
+            {
+                throw new ArgumentOutOfRangeException("value");
+            }
+
             return BASE64_ALPHABET[value];
         }
     }

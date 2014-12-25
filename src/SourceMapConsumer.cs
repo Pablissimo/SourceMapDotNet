@@ -64,7 +64,7 @@ namespace SourceMapNet
                         File = x.SourcesIndex.HasValue ? _file.Sources[x.SourcesIndex.Value] : _file.File,
                         LineNumber = x.SourceLineIndex.Value + 1
                     })
-                    .Distinct(new SourceReferenceByLineEqualityComparer())
+                    .Distinct(new SourceReferenceEqualityComparer())
                     .ToArray();
             }
         }
