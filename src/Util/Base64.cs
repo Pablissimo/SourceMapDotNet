@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SourceMapNet.Util
 {
-    public static class Base64
+    internal static class Base64
     {
         private const string BASE64_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         private static Dictionary<char, byte> _decodeTable = GetDecodeTable();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SourceMapNet.Model
 {
-    public class MappingSegment
+    internal class MappingSegment
     {
         public int GeneratedLineIndex { get; set; }
         public int GeneratedColumnIndex { get; set; }

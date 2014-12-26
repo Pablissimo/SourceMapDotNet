@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SourceMapNet.Util
 {
-    public static class VlqDecoder
+    internal static class VlqDecoder
     {
         private const byte VLQ_BASE_SHIFT = 5;
         private const byte VLQ_BASE = 1 << VLQ_BASE_SHIFT;

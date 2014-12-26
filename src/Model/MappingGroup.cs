@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SourceMapNet.Model
 {
-    public class MappingGroup
+    internal class MappingGroup
     {
         public IEnumerable<MappingSegment> Segments { get; set; }
     }

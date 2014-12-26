@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SourceMapNet.Util
 {
-    public class SourceReferenceEqualityComparer : IEqualityComparer<SourceReference>
+    internal class SourceReferenceEqualityComparer : IEqualityComparer<SourceReference>
     {
         public bool Equals(SourceReference x, SourceReference y)
         {
