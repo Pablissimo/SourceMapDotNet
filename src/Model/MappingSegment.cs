@@ -16,6 +16,11 @@ namespace SourceMapNet.Model
         public int? SourceColumnIndex { get; set; }
         public int? NamesIndex { get; set; }
 
+        public MappingSegment()
+        {
+
+        }
+
         public MappingSegment(int generatedLineIndex, string encodedFields) 
         {
             this.GeneratedLineIndex = generatedLineIndex;

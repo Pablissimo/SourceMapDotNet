@@ -51,6 +51,7 @@
     <Compile Include="SourceMapConsumer.cs" />
     <Compile Include="Util\Base64.cs" />
     <Compile Include="Util\Comparers\SourceReferenceEqualityComparer.cs" />
+    <Compile Include="Util\MappingDecoder.cs" />
     <Compile Include="Util\VlqDecoder.cs" />
   </ItemGroup>
   <ItemGroup>

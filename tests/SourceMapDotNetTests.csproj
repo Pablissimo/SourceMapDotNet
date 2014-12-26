@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\src\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.core">
       <HintPath>..\src\packages\NUnitTestAdapter.1.2\lib\nunit.core.dll</HintPath>
       <Private>False</Private>
@@ -66,9 +69,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SourceMapFileTests.cs" />
+    <Compile Include="SourceMapConsumerTests.cs" />
     <Compile Include="Util\Base64Tests.cs" />
     <Compile Include="Util\Comparers\SourceReferenceEqualityComparerTests.cs" />
+    <Compile Include="Util\MappingDecoderTests.cs" />
     <Compile Include="Util\VlqDecoderTests.cs" />
   </ItemGroup>
   <ItemGroup>

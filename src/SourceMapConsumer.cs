@@ -44,14 +44,14 @@ namespace SourceMapNet
             }
             else if (line > _mappingGroups.Count)
             {
-                return null;
+                return new SourceReference[0];
             }
 
             var generatedLine = _mappingGroups[line - 1];
 
             if (generatedLine.Segments == null || !generatedLine.Segments.Any())
             {
-                return null;
+                return new SourceReference[0];
             }
             else
             {
@@ -69,91 +69,9 @@ namespace SourceMapNet
             }
         }
 
-        public SourceReference? OriginalPositionFor(int line)
-        {
-            var matching = this.OriginalPositionsFor(line);
-            return (matching ?? Enumerable.Empty<SourceReference>()).FirstOrDefault();
-        }
-
         private void ParseMappings()
         {
-            _mappingGroups = new List<MappingGroup>();
-
-            var groupsRaw = _file.Mappings.Split(';');
-            for (var i = 0; i < groupsRaw.Length; i++)
-            {
-                var encodedLine = groupsRaw[i];
-                if (string.IsNullOrEmpty(encodedLine))
-                {
-                    _mappingGroups.Add(new MappingGroup());
-                    continue;
-                }
-                else
-                {
-                    _mappingGroups.Add(new MappingGroup
-                    {
-                        Segments = encodedLine
-                                        .Split(',')
-                                        .Select(x => new MappingSegment(i, x))
-                                        .ToArray()
-                    });
-                }
-            }
-
-            FixUpGroupSegmentOffsets(_mappingGroups);
-        }
-
-        private void FixUpGroupSegmentOffsets(IList<MappingGroup> groups)
-        {
-            int? lastSourcesIndex = null;
-            int? lastSourceLineIndex = null;
-            int? lastSourceColumnIndex = null;
-            int? lastNamesIndex = null;
-
-            foreach (var group in groups.Where(x => x.Segments != null))
-            {
-                int lastGeneratedColumnIndex = 0;
-                foreach (var segment in group.Segments)
-                {
-                    lastGeneratedColumnIndex = segment.GeneratedColumnIndex = segment.GeneratedColumnIndex + lastGeneratedColumnIndex;
-
-                    if (segment.SourcesIndex.HasValue && lastSourcesIndex.HasValue)
-                    {
-                        lastSourcesIndex = segment.SourcesIndex = segment.SourcesIndex + lastSourcesIndex;
-                    }
-                    else if (segment.SourcesIndex.HasValue)
-                    {
-                        lastSourcesIndex = segment.SourcesIndex;
-                    }
-
-                    if (segment.SourceLineIndex.HasValue && lastSourceLineIndex.HasValue)
-                    {
-                        lastSourceLineIndex = segment.SourceLineIndex = segment.SourceLineIndex + lastSourceLineIndex;
-                    }
-                    else if (segment.SourceLineIndex.HasValue)
-                    {
-                        lastSourceLineIndex = segment.SourceLineIndex;
-                    }
-
-                    if (segment.SourceColumnIndex.HasValue && lastSourceColumnIndex.HasValue)
-                    {
-                        lastSourceColumnIndex = segment.SourceColumnIndex = segment.SourceColumnIndex + lastSourceColumnIndex;
-                    }
-                    else if (segment.SourceColumnIndex.HasValue)
-                    {
-                        lastSourceColumnIndex = segment.SourceColumnIndex;
-                    }
-
-                    if (segment.NamesIndex.HasValue && lastNamesIndex.HasValue)
-                    {
-                        lastNamesIndex = segment.NamesIndex = segment.NamesIndex + lastNamesIndex;
-                    }
-                    else if (segment.NamesIndex.HasValue)
-                    {
-                        lastNamesIndex = segment.NamesIndex;
-                    }
-                }
-            }
+            _mappingGroups = MappingDecoder.Default.GetMappingGroups(_file.Mappings);
         }
     }
 }
