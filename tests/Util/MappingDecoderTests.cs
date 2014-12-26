@@ -93,5 +93,98 @@ namespace SourceMapDotNetTests.Util
             decoderMock
                 .Verify(x => x.GetMappingGroup(2, "third"), Times.Once());
         }
+
+        [Test]
+        public void FixUpGroupSegmentOffsets_TalliesLastGeneratedColumnIndex_ResettingAtEachGroup()
+        {
+            var groups = new List<MappingGroup> 
+            {
+                GetGroup(new MappingSegment { GeneratedColumnIndex = 2 }, new MappingSegment { GeneratedColumnIndex = 5 }),
+                GetGroup(new MappingSegment { GeneratedColumnIndex = 1 }, new MappingSegment { GeneratedColumnIndex = 3 })
+            };
+
+            MappingDecoder.FixUpGroupSegmentOffsets(groups);
+
+            Assert.That(groups[0].Segments.ElementAt(0).GeneratedColumnIndex, Is.EqualTo(2));
+            Assert.That(groups[0].Segments.ElementAt(1).GeneratedColumnIndex, Is.EqualTo(7));
+            Assert.That(groups[1].Segments.ElementAt(0).GeneratedColumnIndex, Is.EqualTo(1));
+            Assert.That(groups[1].Segments.ElementAt(1).GeneratedColumnIndex, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void FixUpGroupSegmentOffsets_TalliesSourcesIndices()
+        {
+            var groups = new List<MappingGroup> 
+            {
+                GetGroup(new MappingSegment { SourcesIndex = 1 }, new MappingSegment { SourcesIndex = 4 }),
+                GetGroup(new MappingSegment { SourcesIndex = null }, new MappingSegment { SourcesIndex = 3 })
+            };
+
+            MappingDecoder.FixUpGroupSegmentOffsets(groups);
+
+            Assert.That(groups[0].Segments.ElementAt(0).SourcesIndex, Is.EqualTo(1));
+            Assert.That(groups[0].Segments.ElementAt(1).SourcesIndex, Is.EqualTo(5));
+            Assert.That(groups[1].Segments.ElementAt(0).SourcesIndex, Is.EqualTo(null));
+            Assert.That(groups[1].Segments.ElementAt(1).SourcesIndex, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void FixUpGroupSegmentOffsets_TalliesSourceLineIndices()
+        {
+            var groups = new List<MappingGroup> 
+            {
+                GetGroup(new MappingSegment { SourceLineIndex = 1 }, new MappingSegment { SourceLineIndex = 4 }),
+                GetGroup(new MappingSegment { SourceLineIndex = null }, new MappingSegment { SourceLineIndex = 3 })
+            };
+
+            MappingDecoder.FixUpGroupSegmentOffsets(groups);
+
+            Assert.That(groups[0].Segments.ElementAt(0).SourceLineIndex, Is.EqualTo(1));
+            Assert.That(groups[0].Segments.ElementAt(1).SourceLineIndex, Is.EqualTo(5));
+            Assert.That(groups[1].Segments.ElementAt(0).SourceLineIndex, Is.EqualTo(null));
+            Assert.That(groups[1].Segments.ElementAt(1).SourceLineIndex, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void FixUpGroupSetmentOffsets_TalliesSourceColumnIndices()
+        {
+            var groups = new List<MappingGroup> 
+            {
+                GetGroup(new MappingSegment { SourceColumnIndex = 1 }, new MappingSegment { SourceColumnIndex = 4 }),
+                GetGroup(new MappingSegment { SourceColumnIndex = null }, new MappingSegment { SourceColumnIndex = 3 })
+            };
+
+            MappingDecoder.FixUpGroupSegmentOffsets(groups);
+
+            Assert.That(groups[0].Segments.ElementAt(0).SourceColumnIndex, Is.EqualTo(1));
+            Assert.That(groups[0].Segments.ElementAt(1).SourceColumnIndex, Is.EqualTo(5));
+            Assert.That(groups[1].Segments.ElementAt(0).SourceColumnIndex, Is.EqualTo(null));
+            Assert.That(groups[1].Segments.ElementAt(1).SourceColumnIndex, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void FixUpGroupSetmentOffsets_TalliesNamesIndices()
+        {
+            var groups = new List<MappingGroup> 
+            {
+                GetGroup(new MappingSegment { NamesIndex = 1 }, new MappingSegment { NamesIndex = 4 }),
+                GetGroup(new MappingSegment { NamesIndex = null }, new MappingSegment { NamesIndex = 3 })
+            };
+
+            MappingDecoder.FixUpGroupSegmentOffsets(groups);
+
+            Assert.That(groups[0].Segments.ElementAt(0).NamesIndex, Is.EqualTo(1));
+            Assert.That(groups[0].Segments.ElementAt(1).NamesIndex, Is.EqualTo(5));
+            Assert.That(groups[1].Segments.ElementAt(0).NamesIndex, Is.EqualTo(null));
+            Assert.That(groups[1].Segments.ElementAt(1).NamesIndex, Is.EqualTo(8));
+        }
+
+        private static MappingGroup GetGroup(params MappingSegment[] segments)
+        {
+            return new MappingGroup
+            {
+                Segments = segments
+            };
+        }
     }
 }
