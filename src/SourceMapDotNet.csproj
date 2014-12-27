@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISourceMapConsumer.cs" />
     <Compile Include="Model\MappingGroup.cs" />
     <Compile Include="Model\MappingSegment.cs" />
     <Compile Include="Model\SourceMapFile.cs" />

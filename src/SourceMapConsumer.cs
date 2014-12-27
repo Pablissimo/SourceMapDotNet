@@ -14,7 +14,7 @@ namespace SourceMapNet
     /// Reads and parses source map files and provides the ability to query mappings
     /// between generated source positions and their corresponding original source positions.
     /// </summary>
-    public class SourceMapConsumer
+    public class SourceMapConsumer : ISourceMapConsumer
     {
         SourceMapFile _file;
         IList<MappingGroup> _mappingGroups;
