@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <ItemGroup>
-      <OutputPackages Include="$(TargetDir)*.nupkg" />
+        <OutputPackages Include="$(TargetDir)*.nupkg" />
+        <StructuredPackage Include="$(TargetDir)lib\*.*;$(TargetDir)$(ProjectName).nuspec" />
     </ItemGroup>
-  
+
     <PropertyGroup>
         <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 
@@ -48,36 +49,38 @@
       <PackagesConfig Condition="Exists('$(MSBuildProjectDirectory)\packages.config')">$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
       <PackagesConfig Condition="Exists('$(PackagesProjectConfig)')">$(PackagesProjectConfig)</PackagesConfig>
     </PropertyGroup>
-    
-    <PropertyGroup>
-        <!-- NuGet command -->
-        <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(NuGetToolsPath)\NuGet.exe</NuGetExePath>
-        <PackageSources Condition=" $(PackageSources) == '' ">@(PackageSource)</PackageSources>
 
-        <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">"$(NuGetExePath)"</NuGetCommand>
-        <NuGetCommand Condition=" '$(OS)' != 'Windows_NT' ">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
+  <PropertyGroup>
+    <!-- NuGet command -->
+    <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(NuGetToolsPath)\NuGet.exe</NuGetExePath>
+    <PackageSources Condition=" $(PackageSources) == '' ">@(PackageSource)</PackageSources>
 
-        <PackageOutputDir Condition="$(PackageOutputDir) == ''">$(TargetDir.Trim('\\'))</PackageOutputDir>
+    <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">"$(NuGetExePath)"</NuGetCommand>
+    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT' ">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
 
-        <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
-        <NonInteractiveSwitch Condition=" '$(VisualStudioVersion)' != '' AND '$(OS)' == 'Windows_NT' ">-NonInteractive</NonInteractiveSwitch>
+    <PackageOutputDir Condition="$(PackageOutputDir) == ''">$(TargetDir.Trim('\\'))</PackageOutputDir>
 
-        <PaddedSolutionDir Condition=" '$(OS)' == 'Windows_NT'">"$(SolutionDir) "</PaddedSolutionDir>
-        <PaddedSolutionDir Condition=" '$(OS)' != 'Windows_NT' ">"$(SolutionDir)"</PaddedSolutionDir>
+    <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
+    <NonInteractiveSwitch Condition=" '$(VisualStudioVersion)' != '' AND '$(OS)' == 'Windows_NT' ">-NonInteractive</NonInteractiveSwitch>
 
+    <PaddedSolutionDir Condition=" '$(OS)' == 'Windows_NT'">"$(SolutionDir) "</PaddedSolutionDir>
+    <PaddedSolutionDir Condition=" '$(OS)' != 'Windows_NT' ">"$(SolutionDir)"</PaddedSolutionDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
         <!-- Commands -->
         <RestoreCommand>$(NuGetCommand) install "$(PackagesConfig)" -source "$(PackageSources)"  $(NonInteractiveSwitch) $(RequireConsentSwitch) -solutionDir $(PaddedSolutionDir)</RestoreCommand>
-        <BuildCommand>$(NuGetCommand) pack "$(ProjectPath)" -Properties "Configuration=$(Configuration);Platform=$(Platform)" $(NonInteractiveSwitch) -OutputDirectory "$(PackageOutputDir)" -symbols</BuildCommand>
 
         <!-- We need to ensure packages are restored prior to assembly resolve -->
         <BuildDependsOn Condition="$(RestorePackages) == 'true'">
             RestorePackages;
             $(BuildDependsOn);
         </BuildDependsOn>
-
+    
         <!-- Make the build depend on restore packages -->
         <BuildDependsOn Condition="$(BuildPackage) == 'true'">
             $(BuildDependsOn);
+            StructurePackage;
             BuildPackage;
         </BuildDependsOn>
 
@@ -86,6 +89,11 @@
             CleanPackages;
         </CleanDependsOn>          
     </PropertyGroup>
+
+    <Target Name="StructurePackage">
+        <Copy SourceFiles="$(ProjectDir)$(ProjectName).nuspec" DestinationFolder="$(TargetDir)"></Copy>
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(TargetDir)lib"></Copy>
+    </Target>
 
     <Target Name="CheckPrerequisites">
         <!-- Raise an error if we're unable to locate nuget.exe  -->
@@ -100,6 +108,8 @@
 
     <Target Name="CleanPackages">
         <Delete Files="@(OutputPackages)"></Delete>
+        <Delete Files="@(StructuredPackage)"></Delete>
+        <RemoveDir Directories="$(TargetDir)lib"></RemoveDir>
     </Target>
   
     <Target Name="_DownloadNuGet">
@@ -116,7 +126,15 @@
     </Target>
 
     <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites">
-        <Exec Command="$(BuildCommand)"
+      <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+        <Output TaskParameter="Assemblies" ItemName="AssyInfo" />
+      </GetAssemblyIdentity>
+
+      <PropertyGroup>
+        <BuildCommand>$(NuGetCommand) pack "$(TargetDir)$(ProjectName).nuspec" -Version "%(AssyInfo.Version)" -Properties "Configuration=$(Configuration);Platform=$(Platform)" $(NonInteractiveSwitch) -OutputDirectory "$(PackageOutputDir)" -symbols</BuildCommand>
+      </PropertyGroup>
+      
+      <Exec Command="$(BuildCommand)"
               Condition=" '$(OS)' != 'Windows_NT' " />
 
         <Exec Command="$(BuildCommand)"

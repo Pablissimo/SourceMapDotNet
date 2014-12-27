@@ -1,9 +1,9 @@
 ﻿using Moq;
 using NUnit.Framework;
 using SourceMapDotNetTests.Properties;
-using SourceMapNet;
-using SourceMapNet.Model;
-using SourceMapNet.Util;
+using SourceMapDotNet;
+using SourceMapDotNet.Model;
+using SourceMapDotNet.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;

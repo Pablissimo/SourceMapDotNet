@@ -7,8 +7,8 @@
     <ProjectGuid>{DE144A45-D328-4996-BB6D-1F693FB15461}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SourceMapNet</RootNamespace>
-    <AssemblyName>SourceMapNet</AssemblyName>
+    <RootNamespace>SourceMapDotNet</RootNamespace>
+    <AssemblyName>SourceMapDotNet</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>

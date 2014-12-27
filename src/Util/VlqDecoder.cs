@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SourceMapNet.Util
+namespace SourceMapDotNet.Util
 {
     internal static class VlqDecoder
     {

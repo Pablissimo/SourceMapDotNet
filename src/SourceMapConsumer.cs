@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
-using SourceMapNet.Model;
-using SourceMapNet.Util;
+using SourceMapDotNet.Model;
+using SourceMapDotNet.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SourceMapNet
+namespace SourceMapDotNet
 {
     /// <summary>
     /// Reads and parses source map files and provides the ability to query mappings

@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
-using SourceMapNet.Model;
-using SourceMapNet.Util;
+using SourceMapDotNet.Model;
+using SourceMapDotNet.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;

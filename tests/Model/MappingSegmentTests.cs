@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using SourceMapNet.Model;
+using SourceMapDotNet.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

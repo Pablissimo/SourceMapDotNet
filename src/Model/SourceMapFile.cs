@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SourceMapNet.Model
+namespace SourceMapDotNet.Model
 {
     /// <summary>
     /// Deserialisation container for source map version 3 files

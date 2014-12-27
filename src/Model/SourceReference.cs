@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SourceMapNet.Model
+namespace SourceMapDotNet.Model
 {
     /// <summary>
     /// Represents a reference to a particular position in a specified source file.

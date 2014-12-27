@@ -1,10 +1,10 @@
-﻿using SourceMapNet.Model;
+﻿using SourceMapDotNet.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SourceMapNet.Util
+namespace SourceMapDotNet.Util
 {
     internal class MappingDecoder
     {

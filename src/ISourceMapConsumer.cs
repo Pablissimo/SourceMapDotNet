@@ -1,6 +1,6 @@
-﻿using SourceMapNet.Model;
+﻿using SourceMapDotNet.Model;
 using System;
-namespace SourceMapNet
+namespace SourceMapDotNet
 {
     interface ISourceMapConsumer
     {

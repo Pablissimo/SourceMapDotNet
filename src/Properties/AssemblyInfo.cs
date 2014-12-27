@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Parses version 3 source map files for very limited querying")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("pablissimo")]
-[assembly: AssemblyProduct("SourceMapNet")]
+[assembly: AssemblyProduct("SourceMapDotNet")]
 [assembly: AssemblyCopyright("Copyright © Paul O'Neill 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
