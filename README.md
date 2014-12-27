@@ -13,12 +13,12 @@ I needed a way of parsing source map files for the above very limited situation 
 
 Build a SourceMapConsumer by either supplying the JSON contents of a source map file:
 
-    var consumer = new SourceMapNet.SourceMapConsumer("{ source: 'map', goes: 'here' }")
+    var consumer = new SourceMapDotNet.SourceMapConsumer("{ source: 'map', goes: 'here' }")
 
 Or build directly from a SourceMapFile instance, built using your JSON decoder of choice:
 
-    var file = JsonConvert.Deserialize<SourceMapNet.Model.SourceMapFile>("{ source: 'map', goes: 'here' }");
-    var consumer = new SourceMapNet.SourceMapConsumer(file);
+    var file = JsonConvert.Deserialize<SourceMapDotNet.Model.SourceMapFile>("{ source: 'map', goes: 'here' }");
+    var consumer = new SourceMapDotNet.SourceMapConsumer(file);
 
 Then find out which original source lines map to a given generated source line number (line numbers are 1-based):
 
