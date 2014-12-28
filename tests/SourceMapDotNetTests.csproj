@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>SourceMapDotNet.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Moq">
       <HintPath>..\src\packages\Moq.4.2.1409.1722\lib\net35\Moq.dll</HintPath>
@@ -80,6 +86,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\Library.js.map" />
+    <None Include="SourceMapDotNet.snk" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
