@@ -6,12 +6,15 @@
         <title>SourceMapDotNet</title>
         <authors>pablissimo</authors>
         <owners>pablissimo</owners>
+        <licenseUrl>https://raw.githubusercontent.com/Pablissimo/SourceMapDotNet/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/Pablissimo/SourceMapDotNet</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Parses version 3 source map files for very limited querying</description>
         <copyright>Copyright © Paul O'Neill 2014</copyright>
         <dependencies>
             <dependency id="Newtonsoft.Json" version="6.0.7" />
         </dependencies>
+        <tags>parse sourcemap source map javascript map file</tags>
     </metadata>
     <files>
         <file src="lib\SourceMapDotNet.dll" target="lib\SourceMapDotNet.dll" />
