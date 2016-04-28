@@ -80,7 +80,7 @@ namespace SourceMapDotNet
                     .Where(x => x.SourceLineIndex.HasValue)
                     .Select(x => new SourceReference
                     {
-                        File = x.SourcesIndex.HasValue ? _file.Sources[x.SourcesIndex.Value] : _file.File,
+                        File = x.SourcesIndex.HasValue ? _file.SourceRoot+_file.Sources[x.SourcesIndex.Value] : _file.File,
                         LineNumber = x.SourceLineIndex.Value + 1
                     })
                     .Distinct(new SourceReferenceEqualityComparer())
