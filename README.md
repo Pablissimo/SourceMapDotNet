@@ -1,4 +1,4 @@
-#What is SourceMapDotNet?
+# What is SourceMapDotNet?
 
 This is a very limited port of a very limited portion of Mozilla's [source-map](https://github.com/Mozilla/source-map) module that:
 
@@ -9,7 +9,7 @@ This is a very limited port of a very limited portion of Mozilla's [source-map](
 
 I needed a way of parsing source map files for the above very limited situation for another project, and figured I'd publish what I had. I've no intention of expanding it to match the API of Mozilla's excellent JavaScript library, nor support generation of source maps.
 
-##Usage
+## Usage
 
 Build a SourceMapConsumer by either supplying the JSON contents of a source map file:
 
@@ -35,7 +35,7 @@ Then find out which original source lines map to a given generated source line n
 
 An empty array is returned if there are no matching original source lines for the specified generated source line.
 
-##Dependencies
+## Dependencies
 
 The following dependencies are pulled via NuGet:
 
@@ -44,5 +44,5 @@ The following dependencies are pulled via NuGet:
 * NUnit
 
 
-##Licence
+## Licence
 Licensed under MIT, just go nuts.
