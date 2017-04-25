@@ -85,6 +85,16 @@ namespace SourceMapDotNetTests
         }
 
         [Test]
+        public void OriginalPositionsFor_ReturnsFilePathWhichRespectsSourceRoot()
+        {
+            // Line 1 maps to lines 2 and 11
+            var consumer = new SourceMapConsumer(new SourceMapFile { Version = 3, Sources = new[] { "File", "OriginalFile" }, SourceRoot="RootPath/" });
+            var sourceLines = consumer.OriginalPositionsFor(1);
+
+            Assert.That(sourceLines.All(x => x.File == "RootPath/OriginalFile"));
+        }
+
+        [Test]
         public void OriginalPositionsFor_ReturnsEmptyArray_IfNoMatchingSourceLines()
         {
             var consumer = new SourceMapConsumer(new SourceMapFile { Version = 3 });
